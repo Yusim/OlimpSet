@@ -10,3 +10,7 @@ C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.Properties.Resources.resources
 C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.csproj.GenerateResource.Cache
 C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.exe
 C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.pdb
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\FNewClipboard.baml
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\FNewClipboard.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet_MarkupCompile.lref

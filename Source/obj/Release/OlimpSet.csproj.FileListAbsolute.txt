@@ -1,0 +1,16 @@
+C:\MyDoc\Trash\OlimpSet\Work\OlimpSet.exe
+C:\MyDoc\Trash\OlimpSet\Work\OlimpSet.pdb
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\ResolveAssemblyReference.cache
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\FMain.baml
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\FMain.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\App.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\OlimpSet_MarkupCompile.cache
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\OlimpSet.g.resources
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\OlimpSet.Properties.Resources.resources
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\OlimpSet.csproj.GenerateResource.Cache
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\OlimpSet.exe
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\OlimpSet.pdb
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\FNewClipboard.baml
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\FNewClipboard.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Release\OlimpSet_MarkupCompile.lref

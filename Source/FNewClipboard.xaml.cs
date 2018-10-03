@@ -9,29 +9,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml;
 
 namespace OlimpSet
 {
     /// <summary>
-    /// Логика взаимодействия для Window1.xaml
+    /// Логика взаимодействия для FNewClipboard.xaml
     /// </summary>
-    public partial class FMain : Window
+    public partial class FNewClipboard : Window
     {
-        public FMain()
+        public FNewClipboard()
         {
             InitializeComponent();
         }
 
-        public TSetting Setting { get { return (this.Content as TSetting); } }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public static TPers[] GetPersList()
         {
-            XmlDocument xml = new XmlDocument();
-            xml.Load(@"..\temp\aaa.xml");
-            Setting.SetXml(xml);
+            //todo
+            return null;
         }
     }
 }
