@@ -1,0 +1,12 @@
+C:\MyDoc\Trash\OlimpSet\Work\OlimpSet.exe
+C:\MyDoc\Trash\OlimpSet\Work\OlimpSet.pdb
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\ResolveAssemblyReference.cache
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\FMain.baml
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\FMain.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\App.g.cs
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet_MarkupCompile.cache
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.g.resources
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.Properties.Resources.resources
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.csproj.GenerateResource.Cache
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.exe
+C:\MyDoc\Trash\OlimpSet\Source\obj\Debug\OlimpSet.pdb
