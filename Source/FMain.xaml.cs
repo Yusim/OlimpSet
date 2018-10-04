@@ -27,11 +27,5 @@ namespace OlimpSet
 
         public TSetting Setting { get { return (this.Content as TSetting); } }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            XmlDocument xml = new XmlDocument();
-            xml.Load(@"..\temp\aaa.xml");
-            Setting.SetXml(xml);
-        }
     }
 }

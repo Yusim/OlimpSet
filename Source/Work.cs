@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
-using System.Windows.Media;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml;
 using Microsoft.Win32;
-using System.Windows;
+using System.Collections;
 
 namespace OlimpSet
 {
@@ -19,6 +19,22 @@ namespace OlimpSet
             while (s.Contains("  ")) s = s.Replace("  ", " ");
             return s.Trim();
         }
+
+        private static Color[] fColorList = new Color[] 
+        { 
+            Colors.LightGoldenrodYellow,
+            Colors.LightGray,
+            Colors.LightPink,
+            Colors.LightGreen,
+            Colors.Cyan,
+            Colors.LightBlue,
+            Colors.Violet,
+            Colors.Yellow,
+            Colors.Chartreuse,
+            Colors.Aquamarine,
+            Colors.Coral,
+        };
+        public static Color[] ColorList { get { return fColorList; } }
     }
 
     public class TChangedClass
@@ -122,6 +138,7 @@ namespace OlimpSet
                 {
                     fCurRoom = value;
                     OnPropertyChanged("CurRoom");
+                    OnPropertyChanged("IsEnableDelRoom");
                 }
             }
         }
@@ -133,6 +150,7 @@ namespace OlimpSet
                 return PersList.Length == 0;
             }
         }
+        public bool IsNotEmpty { get { return !IsEmpty; } }
 
         private bool fIsChange = false;
         public bool IsChange
@@ -156,6 +174,8 @@ namespace OlimpSet
                 return ((fRoomList.Count > 1) && (CurRoom.CurPersCount == 0)); 
             }
         }
+
+        public Color[] ColorList { get { return Util.ColorList; } }
         
         public ICommand ComAddRoom { get; private set; }
         public ICommand ComDelRoom { get; private set; }
@@ -220,7 +240,7 @@ namespace OlimpSet
         private void DoComNew()
         {
             if (IsChange && (MessageBox.Show("Текущая рассадка не сохранена. Продолжить?", "Вопрос", MessageBoxButton.YesNo) == MessageBoxResult.No)) return;
-            TPers[] ls = FNewClipboard.GetPersList();
+            TPers[] ls = FNewClipboard.GetPersList(this);
             if (ls != null)
                 New(ls);
         }
@@ -234,7 +254,7 @@ namespace OlimpSet
                 foreach (int l in (from p in PersList orderby p.Level select p.Level).Distinct())
                 {
                     TLevel lvl = new TLevel(this, l);
-                    lvl.Color = Colors.LightGoldenrodYellow;
+                    lvl.Color = ColorList[l % ColorList.Length];
                     lsLevel.Add(lvl);
                 }
                 LevelList = lsLevel.ToArray();
@@ -356,7 +376,7 @@ namespace OlimpSet
                 string NumRoom = Util.NormStr(xNumRoom.InnerText);
                 XmlNode xBoss = xRoom.SelectSingleNode("Boss");
                 if (xBoss == null) throw new Exception("Не найден тег «.../Room/Boss»");
-                string Boss = Util.NormStr(xNumRoom.InnerText);
+                string Boss = Util.NormStr(xBoss.InnerText);
                 TRoom room = new TRoom(this);
                 fRoomList.Add(room);
                 room.NumRoom = NumRoom;
@@ -398,8 +418,10 @@ namespace OlimpSet
             Parent = parent;
             TableList = new TTable[RowCount, ColCount];
             for (int r = 0; r < RowCount; r++)
+            {
                 for (int c = 0; c < ColCount; c++)
                     TableList[r, c] = new TTable(this);
+            }
         }
 
         public const int RowCount = 5;
@@ -407,6 +429,15 @@ namespace OlimpSet
 
         public TSetting Parent { get; private set; }
         public TTable[,] TableList { get; private set; }
+        public TTable this[int npp]
+        {
+            get
+            {
+                int r = npp / ColCount;
+                int c = npp % ColCount;
+                return TableList[r, c];
+            }
+        }
 
         private string fNumRoom = "бн";
         public string NumRoom
@@ -475,13 +506,20 @@ namespace OlimpSet
             {
                 if ((value != fLeft) && ((value == null) || (value.Parent == Parent.Parent)))
                 {
+                    TPers old = Left;                    
                     RemovePers(value);
+                    if (old != null) old.LevelLink.OnPropertyChanged("CurPersCount");
                     fLeft = value;
                     Parent.Parent.IsChange = true;
                     OnPropertyChanged("Left");
                     Parent.OnPropertyChanged("CurPersCount");
                     Parent.Parent.OnPropertyChanged("CurPersList");
-                    if (value != null) value.OnPropertyChanged("Table");
+                    Parent.Parent.OnPropertyChanged("IsEnableDelRoom");
+                    if (value != null)
+                    {
+                        value.OnPropertyChanged("Table");
+                        value.LevelLink.OnPropertyChanged("CurPersCount");
+                    }
                 }
             }
         }
@@ -494,13 +532,20 @@ namespace OlimpSet
             {
                 if ((value != fRight) && ((value == null) || (value.Parent == Parent.Parent)))
                 {
+                    TPers old = Right;  
                     RemovePers(value);
+                    if (old != null) old.LevelLink.OnPropertyChanged("CurPersCount");
                     fRight = value;
                     Parent.Parent.IsChange = true;
                     OnPropertyChanged("Right");
                     Parent.OnPropertyChanged("CurPersCount");
                     Parent.Parent.OnPropertyChanged("CurPersList");
-                    if (value != null) value.OnPropertyChanged("Table");
+                    Parent.Parent.OnPropertyChanged("IsEnableDelRoom");
+                    if (value != null)
+                    {
+                        value.OnPropertyChanged("Table");
+                        value.LevelLink.OnPropertyChanged("CurPersCount");
+                    }
                 }
             }
         }
@@ -587,10 +632,7 @@ namespace OlimpSet
 
         public Color Color 
         {
-            get
-            {
-                return (from x in Parent.LevelList where x.Level==Level select x).First().Color; 
-            }
+            get { return LevelLink.Color; }
         }
 
         public TTable Table
@@ -605,6 +647,11 @@ namespace OlimpSet
             }
         }
 
+        public TLevel LevelLink
+        {
+            get { return (from x in Parent.LevelList where x.Level == Level select x).First(); }
+        }
+
         public ICommand ComRemove { get; private set; }
 
         private void DoComRemove()
@@ -614,6 +661,7 @@ namespace OlimpSet
             {
                 if (tb.Left == this) tb.Left = null;
                 if (tb.Right == this) tb.Right = null;
+                LevelLink.OnPropertyChanged("CurPersCount");
             }
         }
     }
@@ -640,7 +688,10 @@ namespace OlimpSet
                     OnPropertyChanged("Color");
                     foreach (TPers p in Parent.PersList)
                         if (p.Level == Level)
+                        {
                             p.OnPropertyChanged("Color");
+                        }
+                    Parent.IsChange = true;
                 }
             }
         }

@@ -1,8 +1,92 @@
-﻿<Window x:Class="OlimpSet.FNewClipboard"
+﻿<Window 
+    x:Class="OlimpSet.FNewClipboard"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="FNewClipboard" Height="300" Width="300">
-    <Grid>
+    xmlns:local="clr-namespace:OlimpSet"
+    Title="Загрузка из буфера обмена"
+    Height="500" Width="700"
+    WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:vmFromClip}">
+            <Grid Grid.IsSharedSizeScope="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Button Grid.Row="0" Margin="4" Command="{Binding ComLoadClip}">
+                    <StackPanel Margin="4" Orientation="Horizontal">
+                        <Image Source="Pics/IcoClip.png"/>
+                        <TextBlock Margin="2" VerticalAlignment="Center" Text="Забрать данные из буфера обмена"/>
+                    </StackPanel>
+                </Button>
+                <Grid Grid.Row="1">
+                    <Grid.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding List.Length}" Value="0">
+                                    <Setter Property="Grid.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" SharedSizeGroup="gr1"/>
+                        <ColumnDefinition Width="*" SharedSizeGroup="gr2"/>
+                        <ColumnDefinition Width="4*" SharedSizeGroup="gr3"/>                        
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="0" Margin="2" FontWeight="Bold" Text="ФИО"/>
+                    <TextBlock Grid.Column="1" Margin="2" FontWeight="Bold" Text="Класс"/>
+                    <TextBlock Grid.Column="2" Margin="2" FontWeight="Bold" Text="Примечание"/>
+                </Grid>
+                <ScrollViewer Grid.Row="2" Margin="4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+                    <ItemsControl ItemsSource="{Binding List}"/>
+                </ScrollViewer>
+                <StackPanel Grid.Row="3" Margin="4" Orientation="Horizontal">
+                    <TextBlock Text="Всего дебилов: "/>
+                    <TextBlock Text="{Binding List.Length}" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TPers}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="gr1"/>
+                    <ColumnDefinition SharedSizeGroup="gr2"/>
+                    <ColumnDefinition SharedSizeGroup="gr3"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Margin="2" Text="{Binding Fio}"/>
+                <StackPanel Grid.Column="1" Margin="2" Orientation="Horizontal">
+                    <TextBlock Text="{Binding Level}"/>
+                    <TextBlock Text="-"/>
+                    <TextBlock Text="{Binding Symbol}"/>
+                </StackPanel>                
+                <TextBlock Grid.Column="2" Margin="2" Text="{Binding Rem}"/>                
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="grButton"/>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="grButton"/>
+        </Grid.ColumnDefinitions>
         
+        <ContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" x:Name="Box">
+            <ContentControl.Content>
+                <local:vmFromClip/>
+            </ContentControl.Content>
+        </ContentControl>
+        <Button Grid.Column="1" Grid.Row="1" Margin="4" Content="Ok" IsDefault="True" Click="Button_Click"/>
+        <Button Grid.Column="2" Grid.Row="1" Margin="4" Content="Cancel" IsCancel="True"/>
     </Grid>
 </Window>

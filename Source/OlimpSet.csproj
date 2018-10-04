@@ -110,6 +110,18 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pics\IcoLoad.png" />
+    <Resource Include="Pics\IcoNew.png" />
+    <Resource Include="Pics\IcoSave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pics\IcoAdd.png" />
+    <Resource Include="Pics\IcoDel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pics\IcoClip.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
