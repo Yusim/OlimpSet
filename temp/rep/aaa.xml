@@ -6,16 +6,14 @@
       <Id>1</Id>
       <Fio>АЗНАБАЕВ ФАТИХ БУЛАТОВИЧ</Fio>
       <Level>1</Level>
-      <Symbol>
-      </Symbol>
+      <Symbol>б</Symbol>
       <Rem>Вот и кончились букеты,</Rem>
     </Pers>
     <Pers>
       <Id>2</Id>
       <Fio>АККУЖИН РИМ ХУРМАТОВИЧ</Fio>
       <Level>1</Level>
-      <Symbol>
-      </Symbol>
+      <Symbol>а</Symbol>
       <Rem>СМС, понты, конфеты,</Rem>
     </Pers>
     <Pers>
@@ -30,16 +28,14 @@
       <Id>4</Id>
       <Fio>АЛИБАЕВА ГУЛЬЧАЧАК КИНЬЯБАЕВНА</Fio>
       <Level>1</Level>
-      <Symbol>
-      </Symbol>
+      <Symbol>б</Symbol>
       <Rem>Ссоры, крики, расставанья,</Rem>
     </Pers>
     <Pers>
       <Id>5</Id>
       <Fio>АЛЬБАКОВ САЛАВАТ НУРИТДИНОВИЧ</Fio>
       <Level>1</Level>
-      <Symbol>
-      </Symbol>
+      <Symbol>г</Symbol>
       <Rem>«Почему не позвонил?»</Rem>
     </Pers>
     <Pers>
@@ -690,7 +686,7 @@
     </Pers>
     <Pers>
       <Id>86</Id>
-      <Fio>ДОБРЫНИН АЛЕКСАНДР НИКОЛАЕВИЧ</Fio>
+      <Fio>Константиновский Сигизмунд Лазоревич оглы</Fio>
       <Level>3</Level>
       <Symbol>
       </Symbol>
@@ -2656,7 +2652,7 @@
     </Color>
     <Color>
       <Level>10</Level>
-      <RGB>#FFFAFAD2</RGB>
+      <RGB>#FFFFFF00</RGB>
     </Color>
     <Color>
       <Level>11</Level>
@@ -2665,9 +2661,8 @@
   </ColorList>
   <RoomList>
     <Room>
-      <NumRoom>бн</NumRoom>
-      <Boss>
-      </Boss>
+      <NumRoom>101</NumRoom>
+      <Boss>Иванов</Boss>
       <TableList>
         <Table>
           <Row>1</Row>
@@ -2762,9 +2757,8 @@
       </TableList>
     </Room>
     <Room>
-      <NumRoom>бн</NumRoom>
-      <Boss>
-      </Boss>
+      <NumRoom>102</NumRoom>
+      <Boss>Петров</Boss>
       <TableList>
         <Table>
           <Row>1</Row>
@@ -2859,9 +2853,8 @@
       </TableList>
     </Room>
     <Room>
-      <NumRoom>бн</NumRoom>
-      <Boss>
-      </Boss>
+      <NumRoom>103</NumRoom>
+      <Boss>Сидоров</Boss>
       <TableList>
         <Table>
           <Row>1</Row>
@@ -2956,7 +2949,7 @@
       </TableList>
     </Room>
     <Room>
-      <NumRoom>бн</NumRoom>
+      <NumRoom>104</NumRoom>
       <Boss>
       </Boss>
       <TableList>
@@ -3048,6 +3041,103 @@
           <Row>5</Row>
           <Col>3</Col>
           <Left>92</Left>
+          <Right>0</Right>
+        </Table>
+      </TableList>
+    </Room>
+    <Room>
+      <NumRoom>105</NumRoom>
+      <Boss>
+      </Boss>
+      <TableList>
+        <Table>
+          <Row>1</Row>
+          <Col>1</Col>
+          <Left>257</Left>
+          <Right>258</Right>
+        </Table>
+        <Table>
+          <Row>1</Row>
+          <Col>2</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>1</Row>
+          <Col>3</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>2</Row>
+          <Col>1</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>2</Row>
+          <Col>2</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>2</Row>
+          <Col>3</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>3</Row>
+          <Col>1</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>3</Row>
+          <Col>2</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>3</Row>
+          <Col>3</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>4</Row>
+          <Col>1</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>4</Row>
+          <Col>2</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>4</Row>
+          <Col>3</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>5</Row>
+          <Col>1</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>5</Row>
+          <Col>2</Col>
+          <Left>0</Left>
+          <Right>0</Right>
+        </Table>
+        <Table>
+          <Row>5</Row>
+          <Col>3</Col>
+          <Left>0</Left>
           <Right>0</Right>
         </Table>
       </TableList>

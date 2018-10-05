@@ -8,6 +8,9 @@ using System.Windows.Media;
 using System.Xml;
 using Microsoft.Win32;
 using System.Collections;
+using System.IO;
+using System.Xml.Xsl;
+using System.Text;
 
 namespace OlimpSet
 {
@@ -35,6 +38,18 @@ namespace OlimpSet
             Colors.Coral,
         };
         public static Color[] ColorList { get { return fColorList; } }
+
+        public static string XmlTransform(XmlDocument Xml, string Xsl)
+        {
+            StringReader sr = new StringReader(Xsl);
+            XmlReader xr = XmlReader.Create(sr);
+            XslCompiledTransform tr = new XslCompiledTransform();
+            tr.Load(xr);
+            StringBuilder sb = new StringBuilder();
+            XmlWriter res = XmlWriter.Create(sb, tr.OutputSettings);
+            tr.Transform(Xml, res);
+            return sb.ToString();
+        }
     }
 
     public class TChangedClass
@@ -96,6 +111,8 @@ namespace OlimpSet
             ComSave = new RelayCommand(DoComSave);
             ComLoad = new RelayCommand(DoComLoad);
             ComNew = new RelayCommand(DoComNew);
+            ComRepMap = new RelayCommand(DoComRepMap);
+            ComRepList = new RelayCommand(DoComRepList);
         }
 
         public TPers[] PersList { get; private set; }
@@ -184,6 +201,9 @@ namespace OlimpSet
         public ICommand ComLoad { get; private set; }
         public ICommand ComNew { get; private set; }
 
+        public ICommand ComRepMap { get; private set; }
+        public ICommand ComRepList { get; private set; }
+
         private void DoComAddRoom()
         {
             TRoom room = new TRoom(this);
@@ -243,6 +263,33 @@ namespace OlimpSet
             TPers[] ls = FNewClipboard.GetPersList(this);
             if (ls != null)
                 New(ls);
+        }
+
+        private void DoComRepMap()
+        {
+            SaveReport(Properties.Resources.RoomMap);
+        }
+        private void DoComRepList()
+        {
+            SaveReport(Properties.Resources.ListMap);
+        }
+
+        private void SaveReport(string xsl)
+        {
+            if (IsNotEmpty)
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Filter = "Документ Word (*.rtf)|*.rtf";
+                dlg.DefaultExt = "rtf";
+                if (dlg.ShowDialog() == true)
+                    try
+                    {
+                        XmlDocument xml = GetXml();
+                        string rtf = Util.XmlTransform(xml, xsl);
+                        File.WriteAllText(dlg.FileName, rtf, Encoding.GetEncoding(1251));
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
         }
 
         public void New(IEnumerable<TPers> lsPers)

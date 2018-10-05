@@ -62,7 +62,6 @@
                 <TextBlock Grid.Column="0" Margin="2" Text="{Binding Fio}"/>
                 <StackPanel Grid.Column="1" Margin="2" Orientation="Horizontal">
                     <TextBlock Text="{Binding Level}"/>
-                    <TextBlock Text="-"/>
                     <TextBlock Text="{Binding Symbol}"/>
                 </StackPanel>                
                 <TextBlock Grid.Column="2" Margin="2" Text="{Binding Rem}"/>                

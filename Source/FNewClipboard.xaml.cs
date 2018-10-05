@@ -76,7 +76,7 @@ namespace OlimpSet
                     string fSym = "";
                     foreach (char c in Util.NormStr(fLvlSym.Substring(n)))
                         if (char.IsLetter(c))
-                            fSym += c.ToString().ToUpper();
+                            fSym += c.ToString().ToLower();
                     if (fFio != "")
                         ls.Add(new TPers(Parent, fFio, fLvl, fSym, fRem));
                 }
