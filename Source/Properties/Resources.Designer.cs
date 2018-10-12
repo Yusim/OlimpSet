@@ -67,15 +67,33 @@ namespace OlimpSet.Properties {
         ///  
         ///  &lt;!--Весь документ--&gt;
         ///  &lt;xsl:template match=&quot;/&quot;&gt;
+        ///    &lt;xsl:text&gt;{\rtf\ansi\ansicpg1251 {\fonttbl{\f0 Arial;}}\f0\fs20&amp;#10;&lt;/xsl:text&gt;
+        ///    &lt;xsl:text&gt;\paperw11906\paperh16838&amp;#10;&lt;/xsl:text&gt;
+        ///    &lt;xsl:text&gt;\margl567\margr567\margt567\margb567&amp;#10;&lt;/xsl:text&gt;
+        ///    &lt;xsl:text&gt;{\qc\fs32\b Список участников}\par&amp;#10;&lt;/xsl:text [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string ListMap {
+            get {
+                return ResourceManager.GetString("ListMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;windows-1251&quot; ?&gt;
+        ///&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;&gt;
+        ///  &lt;xsl:output method=&quot;text&quot; encoding=&quot;windows-1251&quot;/&gt;
+        ///  
+        ///  &lt;!--Весь документ--&gt;
+        ///  &lt;xsl:template match=&quot;/&quot;&gt;
         ///    &lt;xsl:text&gt;{\rtf\ansi\ansicpg1251 {\fonttbl{\f0 Arial;}}\f0\fs24&amp;#10;&lt;/xsl:text&gt;
         ///    &lt;xsl:text&gt;\paperh11906\paperw16838\landscape&amp;#10;&lt;/xsl:text&gt;
         ///    &lt;xsl:text&gt;\margl567\margr567\margt567\margb567&amp;#10;&lt;/xsl:text&gt;
         ///    &lt;xsl:for-each select=&quot;/OlimpSet/RoomList/Room&quot;&gt;
         /// [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string ListMap {
+        internal static string RoomList {
             get {
-                return ResourceManager.GetString("ListMap", resourceCulture);
+                return ResourceManager.GetString("RoomList", resourceCulture);
             }
         }
         

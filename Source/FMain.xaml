@@ -181,24 +181,37 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="4">
-                    <Button Margin="2" Command="{Binding ComNew}">
-                        <Image Margin="2" Source="Pics/IcoNew.png" ToolTip="Новая посадка"/>
-                    </Button>
-                    <Button Margin="2" Command="{Binding ComLoad}">
-                        <Image Margin="2" Source="Pics/IcoLoad.png" ToolTip="Загрузить посадка"/>
-                    </Button>
-                    <Button Margin="2" Command="{Binding ComSave}" IsEnabled="{Binding IsChange}">
-                        <Image Margin="2" Source="Pics/IcoSave.png" ToolTip="Сохранить посадку"/>
-                    </Button>  
-                    <TextBlock Margin="8"/>
-                    <Button Margin="2" Command="{Binding ComRepMap}" IsEnabled="{Binding IsNotEmpty}">
-                        <Image Margin="2" Source="Pics/IcoRepMap.png" ToolTip="Карта посадки"/>
-                    </Button>
-                    <Button Margin="2" Command="{Binding ComRepList}" IsEnabled="{Binding IsNotEmpty}">
-                        <Image Margin="2" Source="Pics/IcoRepList.png" ToolTip="Список посадки"/>
-                    </Button>
-                </StackPanel>
+                <Menu Grid.Row="0">
+                    <MenuItem Command="{Binding ComNew}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoNew.png" ToolTip="Новая посадка" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="{Binding ComLoad}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoLoad.png" ToolTip="Загрузить посадку" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="{Binding ComSave}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoSave.png" ToolTip="Сохранить посадку" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Command="{Binding ComAddPers}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoAddPers.png" ToolTip="Добавить людей" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoReport.png" ToolTip="Карта посадки" Height="32"/>
+                        </MenuItem.Header>
+                        <MenuItem Command="{Binding ComRepMap}" Header="Карта посадки"/>
+                        <MenuItem Command="{Binding ComRepList}" Header="Список посадки"/>
+                        <MenuItem Command="{Binding ComRepRoom}" Header="Список по комнатам"/>
+                    </MenuItem>
+                </Menu>
                 <Grid Grid.Row="1">
                     <Grid.Style>
                         <Style>

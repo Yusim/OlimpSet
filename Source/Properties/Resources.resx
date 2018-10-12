@@ -121,6 +121,9 @@
   <data name="ListMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ListMap.xsl;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="RoomList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RoomList.xsl;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
   <data name="RoomMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RoomMap.xsl;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>

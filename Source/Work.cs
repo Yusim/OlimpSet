@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml;
-using Microsoft.Win32;
-using System.Collections;
-using System.IO;
 using System.Xml.Xsl;
-using System.Text;
+using Microsoft.Win32;
 
 namespace OlimpSet
 {
@@ -111,8 +110,10 @@ namespace OlimpSet
             ComSave = new RelayCommand(DoComSave);
             ComLoad = new RelayCommand(DoComLoad);
             ComNew = new RelayCommand(DoComNew);
+            ComAddPers = new RelayCommand(DoComAddPers);
             ComRepMap = new RelayCommand(DoComRepMap);
             ComRepList = new RelayCommand(DoComRepList);
+            ComRepRoom= new RelayCommand(DoComRepRoom);
         }
 
         public TPers[] PersList { get; private set; }
@@ -201,8 +202,11 @@ namespace OlimpSet
         public ICommand ComLoad { get; private set; }
         public ICommand ComNew { get; private set; }
 
+        public ICommand ComAddPers { get; private set; }
+
         public ICommand ComRepMap { get; private set; }
         public ICommand ComRepList { get; private set; }
+        public ICommand ComRepRoom { get; private set; }
 
         private void DoComAddRoom()
         {
@@ -231,16 +235,18 @@ namespace OlimpSet
         
         private void DoComSave()
         {
-            if (IsChange)
+            if (IsEmpty)
             {
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Filter = "Файл рассадки (*.xml)|*.xml";
-                dlg.DefaultExt = "xml";
-                if (dlg.ShowDialog() == true)
-                    try { GetXml().Save(dlg.FileName); }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                IsChange = false;
+                MessageBox.Show("Так ведь нет никого!");
+                return;
             }
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "Файл рассадки (*.xml)|*.xml";
+            dlg.DefaultExt = "xml";
+            if (dlg.ShowDialog() == true)
+                try { GetXml().Save(dlg.FileName); }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            IsChange = false;
         }
         private void DoComLoad()
         {
@@ -260,9 +266,21 @@ namespace OlimpSet
         private void DoComNew()
         {
             if (IsChange && (MessageBox.Show("Текущая рассадка не сохранена. Продолжить?", "Вопрос", MessageBoxButton.YesNo) == MessageBoxResult.No)) return;
+            PersList = new TPers[] { };
+            LevelList = new TLevel[] { };
+            fRoomList.Clear();
+            fRoomList.Add(new TRoom(this));
+            CurRoom = null;
+            CurLevel = null;
+            IsChange = false;
+            OnPropertyChanged();
+        }
+
+        private void DoComAddPers()
+        {           
             TPers[] ls = FNewClipboard.GetPersList(this);
             if (ls != null)
-                New(ls);
+                AddPers(ls);
         }
 
         private void DoComRepMap()
@@ -273,42 +291,58 @@ namespace OlimpSet
         {
             SaveReport(Properties.Resources.ListMap);
         }
+        private void DoComRepRoom()
+        {
+            SaveReport(Properties.Resources.RoomList);
+        }
 
         private void SaveReport(string xsl)
         {
-            if (IsNotEmpty)
+            if (IsEmpty)
             {
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Filter = "Документ Word (*.rtf)|*.rtf";
-                dlg.DefaultExt = "rtf";
-                if (dlg.ShowDialog() == true)
-                    try
-                    {
-                        XmlDocument xml = GetXml();
-                        string rtf = Util.XmlTransform(xml, xsl);
-                        File.WriteAllText(dlg.FileName, rtf, Encoding.GetEncoding(1251));
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                MessageBox.Show("Так ведь нет никого!");
+                return;
             }
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "Документ Word (*.rtf)|*.rtf";
+            dlg.DefaultExt = "rtf";
+            if (dlg.ShowDialog() == true)
+                try
+                {
+                    XmlDocument xml = GetXml();
+                    string rtf = Util.XmlTransform(xml, xsl);
+                    File.WriteAllText(dlg.FileName, rtf, Encoding.GetEncoding(1251));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        public void New(IEnumerable<TPers> lsPers)
+        public void AddPers(IEnumerable<TPers> lsPers)
         {
             if (lsPers.Count() > 0)
             {
-                PersList = lsPers.ToArray();
-                List<TLevel> lsLevel = new List<TLevel>();
-                foreach (int l in (from p in PersList orderby p.Level select p.Level).Distinct())
+                List<TPers> newPers = new List<TPers>();
+                newPers.AddRange(PersList);
+                List<TLevel> newLevel = new List<TLevel>();
+                newLevel.AddRange(LevelList);
+                foreach (TPers p in lsPers)
                 {
-                    TLevel lvl = new TLevel(this, l);
-                    lvl.Color = ColorList[l % ColorList.Length];
-                    lsLevel.Add(lvl);
+                    newPers.Add(p);
+                    if((from x in newLevel where x.Level==p.Level select x).Count()==0)
+                    {
+                        TLevel lvl = new TLevel(this, p.Level);
+                        lvl.Color = ColorList[p.Level % ColorList.Length];
+                        newLevel.Add(lvl);
+                    }
                 }
-                LevelList = lsLevel.ToArray();
-                fRoomList.Clear();
-                fRoomList.Add(new TRoom(this));
-                CurLevel = LevelList[0];
-                CurRoom = RoomList[0];
+                PersList = newPers.ToArray();
+                LevelList = newLevel.ToArray();
+                if (RoomList.Length == 0)
+                {
+                    fRoomList.Add(new TRoom(this));
+                    CurRoom = RoomList[0];
+                }
+                if (CurLevel == null)
+                    CurLevel = LevelList[0];
                 IsChange = true;
                 OnPropertyChanged();
             }

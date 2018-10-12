@@ -130,11 +130,16 @@
     <None Include="Resources\RoomMap.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pics\IcoRepList.png" />
-    <Resource Include="Pics\IcoRepMap.png" />
+    <None Include="Resources\ListMap.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ListMap.xsl" />
+    <Resource Include="Pics\IcoReport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pics\IcoAddPers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RoomList.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
