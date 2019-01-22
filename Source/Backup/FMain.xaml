@@ -1,0 +1,265 @@
+﻿<Window 
+    x:Class="OlimpSet.FMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:OlimpSet"
+    Title="Олимпийская посадка"
+    WindowState="Maximized">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type Color}">
+            <Border Margin="2" BorderBrush="Black" BorderThickness="1">
+                <Border.Background>
+                    <SolidColorBrush Color="{Binding}"/>                    
+                </Border.Background>
+                <TextBlock Margin="4" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding}"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TRoom}">
+            <Grid Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" VerticalAlignment="Center" Text="Кабинет №"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" VerticalAlignment="Center" Text="Смотрящий"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding NumRoom, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Boss, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+
+                <ContentControl Grid.Column="0" Grid.Row="1" Content="{Binding [0]}"/>
+                <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding [1]}"/>
+                <ContentControl Grid.Column="2" Grid.Row="1" Content="{Binding [2]}"/>
+
+                <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding [3]}"/>
+                <ContentControl Grid.Column="1" Grid.Row="2" Content="{Binding [4]}"/>
+                <ContentControl Grid.Column="2" Grid.Row="2" Content="{Binding [5]}"/>
+
+                <ContentControl Grid.Column="0" Grid.Row="3" Content="{Binding [6]}"/>
+                <ContentControl Grid.Column="1" Grid.Row="3" Content="{Binding [7]}"/>
+                <ContentControl Grid.Column="2" Grid.Row="3" Content="{Binding [8]}"/>
+
+                <ContentControl Grid.Column="0" Grid.Row="4" Content="{Binding [9]}"/>
+                <ContentControl Grid.Column="1" Grid.Row="4" Content="{Binding [10]}"/>
+                <ContentControl Grid.Column="2" Grid.Row="4" Content="{Binding [11]}"/>
+
+                <ContentControl Grid.Column="0" Grid.Row="5" Content="{Binding [12]}"/>
+                <ContentControl Grid.Column="1" Grid.Row="5" Content="{Binding [13]}"/>
+                <ContentControl Grid.Column="2" Grid.Row="5" Content="{Binding [14]}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TRoom}" x:Key="tmpRoomInList">
+            <Border Margin="2" BorderBrush="Black" BorderThickness="1" Background="White">
+                <StackPanel TextBlock.Foreground="Black">
+                    <StackPanel Margin="2" Orientation="Horizontal" TextBlock.FontWeight="Bold">
+                        <TextBlock Text="Кабинет №"/>
+                        <TextBlock Text="{Binding NumRoom}"/>
+                    </StackPanel>                    
+                    <StackPanel Margin="2" Orientation="Horizontal" TextBlock.FontStyle="Italic">
+                        <TextBlock Text="( "/>
+                        <TextBlock Text="{Binding CurPersCount}"/>
+                        <TextBlock Text=" / "/>
+                        <TextBlock Text="{Binding MaxPersCount}"/>
+                        <TextBlock Text=" )"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>        
+        <DataTemplate DataType="{x:Type local:TLevel}">
+            <Border Margin="2" BorderBrush="Black" BorderThickness="1">
+                <Border.Background>
+                    <SolidColorBrush Color="{Binding Color}"/>
+                </Border.Background>
+                <StackPanel TextBlock.Foreground="Black">
+                    <StackPanel Margin="2" Orientation="Horizontal" TextBlock.FontWeight="Bold">
+                        <TextBlock Text="Параллель "/>
+                        <TextBlock Text="{Binding Level}"/>
+                    </StackPanel>
+                    <StackPanel Margin="2" Orientation="Horizontal" TextBlock.FontStyle="Italic">
+                        <TextBlock Text="( "/>
+                        <TextBlock Text="{Binding CurPersCount}"/>
+                        <TextBlock Text=" / "/>
+                        <TextBlock Text="{Binding MaxPersCount}"/>
+                        <TextBlock Text=" )"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TPers}" x:Key="tmpPersInList">
+            <Border Margin="2" BorderBrush="Black" BorderThickness="1">
+                <Border.Background>
+                    <SolidColorBrush Color="{Binding Color}"/>
+                </Border.Background>
+                <StackPanel TextBlock.Foreground="Black">
+                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding Fio}" ToolTip="{Binding Fio}"/>
+                    <StackPanel Margin="2" Orientation="Horizontal">                        
+                        <TextBlock Text="{Binding Level}"/>                        
+                        <TextBlock Text="{Binding Symbol}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock FontStyle="Italic" Text="{Binding Rem}" ToolTip="{Binding Rem}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>  
+        <DataTemplate DataType="{x:Type local:TPers}">
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
+                <Border.Background>
+                    <SolidColorBrush Color="{Binding Color}"/>
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Grid.Row="0" Margin="2" Orientation="Horizontal" TextBlock.FontWeight="Bold">
+                        <TextBlock Text="{Binding Level}"/>
+                        <TextBlock Text="{Binding Symbol}"/>
+                    </StackPanel>
+                    <Button Grid.Column="1" Grid.Row="0" Margin="2" Command="{Binding ComRemove}">
+                        <Image Source="Pics/IcoDel.png"/>
+                    </Button>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2" ToolTip="{Binding Fio}" Text="{Binding Fio}" TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TTable}">
+            <Border Margin="8, 10, 8, 20" BorderBrush="Black" BorderThickness="3" CornerRadius="4">
+                <Grid Margin="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <ContentControl Grid.Column="0" Margin="4">
+                        <ContentControl.Content>
+                            <Binding Path="Left">
+                                <Binding.TargetNullValue>
+                                    <Button Command="{Binding ComSetLeft}"/>
+                                </Binding.TargetNullValue>
+                            </Binding>
+                        </ContentControl.Content>
+                    </ContentControl>
+                    <ContentControl Grid.Column="1" Margin="4">
+                        <ContentControl.Content>
+                            <Binding Path="Right">
+                                <Binding.TargetNullValue>
+                                    <Button Command="{Binding ComSetRight}"/>
+                                </Binding.TargetNullValue>
+                            </Binding>
+                        </ContentControl.Content>
+                    </ContentControl>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TSetting}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Menu Grid.Row="0">
+                    <MenuItem Command="{Binding ComNew}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoNew.png" ToolTip="Новая посадка" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="{Binding ComLoad}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoLoad.png" ToolTip="Загрузить посадку" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="{Binding ComSave}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoSave.png" ToolTip="Сохранить посадку" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Command="{Binding ComAddPers}">
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoAddPers.png" ToolTip="Добавить людей" Height="32"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <Image Margin="2" Source="Pics/IcoReport.png" ToolTip="Карта посадки" Height="32"/>
+                        </MenuItem.Header>
+                        <MenuItem Command="{Binding ComRepMap}" Header="Карта посадки"/>
+                        <MenuItem Command="{Binding ComRepList}" Header="Список посадки"/>
+                        <MenuItem Command="{Binding ComRepRoom}" Header="Список по комнатам"/>
+                    </MenuItem>
+                </Menu>
+                <Grid Grid.Row="1">
+                    <Grid.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsEmpty}" Value="true">
+                                    <Setter Property="Grid.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>                        
+                    </Grid.Style>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <ListBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="4" ItemsSource="{Binding RoomList}" SelectedItem="{Binding CurRoom}" ItemTemplate="{StaticResource tmpRoomInList}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                    <Border Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" BorderBrush="Black" BorderThickness="1">
+                        <ContentControl Margin="4" Content="{Binding CurRoom}"/>
+                    </Border>                    
+                    <Button Grid.Column="1" Grid.Row="1" Margin="4" Command="{Binding ComAddRoom}">
+                        <StackPanel Margin="2" Orientation="Horizontal">
+                            <Image Source="Pics/IcoAdd.png"/>
+                            <TextBlock Margin="2" Text="Добавить еще кабинет" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="2" Grid.Row="1" Margin="4" Command="{Binding ComDelRoom}" IsEnabled="{Binding IsEnableDelRoom}">
+                        <StackPanel Margin="2" Orientation="Horizontal">
+                            <Image Source="Pics/IcoDel.png"/>
+                            <TextBlock Margin="2" Text="Удалить кабинет" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <ListBox Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Margin="4" ItemsSource="{Binding LevelList}" SelectedItem="{Binding CurLevel}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                    <Border Grid.Column="4" Grid.Row="0" Margin="4" BorderBrush="Black" BorderThickness="1">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding CurPersList}" ItemTemplate="{StaticResource tmpPersInList}" HorizontalContentAlignment="Stretch"/>
+                        </ScrollViewer>
+                    </Border>                    
+                    <ComboBox Grid.Column="4" Grid.Row="1" Margin="4" ItemsSource="{Binding ColorList}" SelectedItem="{Binding CurLevel.Color}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>        
+    </Window.Resources>
+    <local:TSetting/>
+</Window>
