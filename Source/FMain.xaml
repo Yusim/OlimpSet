@@ -129,6 +129,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -143,6 +144,7 @@
                         <Image Source="Pics/IcoDel.png"/>
                     </Button>
                     <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2" ToolTip="{Binding Fio}" Text="{Binding Fio}" TextWrapping="Wrap"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="2" FontStyle="Italic" ToolTip="{Binding Rem}" Text="{Binding Rem}"/>
                 </Grid>
             </Border>
         </DataTemplate>
